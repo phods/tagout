@@ -1,0 +1,136 @@
+#!/usr/bin/python
+
+from tkinter import *
+
+def bt_click():
+    print("bt_click")
+    
+    lb["text"]="FUNCIONOU"
+    
+def bt_read(): 
+    print(ed.get()) 
+    lb["text"]=ed.get()  
+    
+def bt_conf():
+    msgbox1=Tk()
+    msgbox1.title("Confirmar Operacao?")
+    lb=Label(msgbox1, text="DESEJA CONFIRMAR?")
+    lb.place(x=0,y=5)
+    bt_sim = Button(msgbox1, width=5,text="SIM")
+    bt_sim.place(x=5,y=30)
+    bt_nao = Button(msgbox1, width=5,text="NAO",command=msgbox1.destroy)
+    bt_nao.place(x=55,y=30)
+    
+    
+    msgbox1.geometry("70x60+150+150")
+    msgbox1.mainloop() 
+    
+    
+def bt_inserir():
+     janela1=Tk()
+     lb=Label(janela1, text="INSERIR DADOS")
+     lb.place(x=35,y=0)
+     
+     lb_tag=Label(janela1, text="TAG:")
+     lb_tag.place(x=0,y=20)
+     ed_tag=Entry(janela1)
+     ed_tag.place(x=0,y=40)
+     lb_nome=Label(janela1, text="Nome Completo:")
+     lb_nome.place(x=0,y=60)
+     ed_nome=Entry(janela1)
+     ed_nome.place(x=0,y=80)
+     lb_end=Label(janela1, text="Bloco / Apart:")
+     lb_end.place(x=0,y=100)
+     ed_end=Entry(janela1)
+     ed_end.place(x=0,y=120)
+     
+     bt = Button(janela1, width=20,text="INSERIRR",command=bt_conf)
+     bt.place(x=35,y=150)
+     
+     #se confirmado sera executado o SQL
+     
+     janela1.geometry("200x200+100+100")
+     janela1.mainloop()   
+    
+janela = Tk()
+
+bt1 = Button(janela, width=10,text="INSERIR",command=bt_inserir)
+bt1.place(x=0,y=30)
+bt2 = Button(janela, width=10,text="DELETAR",command=bt_click)
+bt2.place(x=100,y=30)
+bt3 = Button(janela, width=10,text="PROCURAR",command=bt_click)
+bt3.place(x=200,y=30)
+
+#ed=Entry(janela)
+##ed.place(x=0,y=0)
+#bt = Button(janela, width=20,text="ok",command=bt_read)
+#bt.place(x=0,y=40)
+
+#lb=Label(janela, text="label")
+#lb.place(x=0,y=60)
+
+counter = 0 
+def counter_label(label):
+  def count():
+    global counter
+    counter += 1
+    label.config(text=str(counter))
+    label.after(1000, count)
+  count()
+label = Label(janela, fg="green")
+label.pack()
+label.place(x=0,y=200)
+counter_label(label)
+button = Button(janela, text='Stop', width=25, command=janela.destroy)
+button.pack()
+button.place(x=0,y=230)
+
+
+lb_jan = Label(janela, 
+               text="SISTEMA DE CONTROLE DE ACESSO",
+               padx=30,
+               font = "Verdana 10 bold",
+               justify=CENTER,
+               bg="gray")
+lb_jan.pack(side=TOP,fill=X)
+
+janela.title("Janela Delay")
+#janela["background"]="gray"
+
+#larguraxaltura+esquerda+top
+#300x300+100+100
+janela.geometry("300x300+100+100")
+
+janela.mainloop()
+
+
+"""
+# Open database connection
+db = MySQLdb.connect("localhost","root","toor","arduino" )
+
+# prepare a cursor object using cursor() method
+cursor = db.cursor()
+x="[30,235,109,110,248]"
+
+# Prepare SQL query to INSERT a record into the database.
+sql = "SELECT * FROM tabelarfid \
+       WHERE tag = '%s'" % (x)
+try:
+   # Execute the SQL command
+   cursor.execute(sql)
+   # Fetch all the rows in a list of lists.
+   results = cursor.fetchall()
+   for row in results:
+      id = row[0]
+      evento = row[1]
+      tag = row[2]
+      
+      # Now print fetched result
+      print "id=%d,evento=%s,tag=%s" % \
+             (id, evento, tag )
+except:
+   print "Error: unable to fecth data"
+
+# disconnect from server
+db.close()
+"""
